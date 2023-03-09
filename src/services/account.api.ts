@@ -1,6 +1,8 @@
+import { LoginRequest } from "../model/login-request";
+import { User } from "../model/user";
+
 export abstract class AccountApi {
-  abstract getUsers(): Promise<any>;
-  abstract createUser(user: any): Promise<any>;
-  abstract getUserById(userId: any): Promise<any>;
-  abstract editUserById(userId: any): Promise<any>;
+  abstract createUser(user: User): Promise<any>;
+  abstract editUser(user: User): Promise<any>;
+  abstract login(request: LoginRequest): Promise<any>;
 }
