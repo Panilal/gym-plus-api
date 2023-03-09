@@ -11,7 +11,7 @@ import {opentracingMiddleware} from './util/opentracing/express-middleware';
 import fs = require('fs');
 import http = require('http');
 import path = require('path');
-import cors = require('cors');
+//import cors = require('cors');
 
 const config = npmPackage.config || {
   protocol: 'http',
@@ -35,7 +35,7 @@ export class ApiServer {
 
     this.app.use(opentracingMiddleware({tracer: this.tracer}));
     this.logger.apply(this.app);
-    this.app.use(cors());
+    //this.app.use(cors());
 
     if (!apiContext || apiContext === '/') {
       this.app.use(express.static(path.join(process.cwd(), 'public'), { maxAge: 31557600000 }));
@@ -81,7 +81,7 @@ export class ApiServer {
       this.server = this.app.listen(this.PORT, () => {
         const addressInfo = this.server.address() as AddressInfo;
 
-        const address = addressInfo.address === '::' ? 'localhost' : addressInfo.address;
+        const address = addressInfo.address === '::' ? '127.0.0.1' : addressInfo.address;
 
         // tslint:disable-next-line:no-console
         console.log(`Listening to http://${address}:${addressInfo.port}`);
