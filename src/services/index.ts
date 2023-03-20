@@ -7,7 +7,7 @@ export * from './account.service';
 export * from './instructors.api';
 export * from './instructors.service';
 export * from './training.api';
-export * from './training.service';
+//export * from './training.service';
 
 import config from './ioc.config';
 

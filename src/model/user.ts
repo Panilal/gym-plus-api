@@ -5,5 +5,10 @@ export class User {
     email: string;
     phoneNumber: string;
     password: string;
-    confirmPassword: string;
+    height: string;
+    weight: string;
+    gender: string;
+    age: string;
+    muscleGain: string;
+    weightLoss: string;
 } 
