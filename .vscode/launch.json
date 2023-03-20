@@ -5,10 +5,51 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "command": "npm start",
-            "name": "Run npm start",
+            "args": [
+                "-u",
+                "tdd",
+                "--timeout",
+                "999999",
+                "--colors",
+                "${workspaceFolder}/test"
+            ],
+            "internalConsoleOptions": "openOnSessionStart",
+            "name": "Mocha Tests",
+            "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Jest: current file",
+            //"env": { "NODE_ENV": "test" },
+            "program": "${workspaceFolder}/node_modules/.bin/jest",
+            "args": [
+                "${fileBasenameNoExtension}",
+                "--config",
+                "jest.config.js"
+            ],
+            "console": "integratedTerminal",
+            "disableOptimisticBPs": true,
+            "windows": {
+                "program": "${workspaceFolder}/node_modules/jest/bin/jest"
+            }
+        },
+        {
+            "command": "npm run start:dev",
+            "name": "Run npm start dev",
             "request": "launch",
             "type": "node-terminal"
-        }
+        },
+        {
+            "command": "npm run test",
+            "name": "Run npm test",
+            "request": "launch",
+            "type": "node-terminal"
+        },
     ]
 }

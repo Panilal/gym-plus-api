@@ -3,6 +3,8 @@ import { AccountApi } from './account.api';
 import { AccountService } from './account.service';
 import {HelloWorldApi} from './hello-world.api';
 import {HelloWorldService} from './hello-world.service';
+import { TrainingApi } from './training.api';
+import { TrainingService } from './training.service';
 
 const config: ContainerConfiguration[] = [
   {
@@ -13,6 +15,11 @@ const config: ContainerConfiguration[] = [
   {
     bind: AccountApi,
     to: AccountService,
+    scope: Scope.Singleton
+  },
+  {
+    bind: TrainingApi,
+    to: TrainingService,
     scope: Scope.Singleton
   }
 ];

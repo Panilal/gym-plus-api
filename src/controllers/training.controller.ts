@@ -1,9 +1,11 @@
-import { GET, Path, PathParam, POST } from 'typescript-rest';
+import { GET, Path, PathParam, POST, PUT } from 'typescript-rest';
 import { Inject } from 'typescript-ioc';
 import { TrainingApi } from '../services';
 import { LoggerApi } from '../logger';
+import { User } from '../model/user';
 
-@Path('/biometric')
+
+@Path('/training')
 export class TrainingController {
 
     @Inject
@@ -15,16 +17,10 @@ export class TrainingController {
         return this._baseLogger.child('TrainingController');
     }
 
-    @POST
-    async createBiometric(biometric: any): Promise<any> {
-        this.logger.info(`saving biometric details of ${name}`);
-        return this.service.createBiometric(biometric);
-    }
-
-    @Path(':bioid')
-    @GET
-    async getTrainingInfo(@PathParam('bioid') bioid: string): Promise<any> {
-      this.logger.info(`Getting training instructions to ${name}`);
-      return this.service.getTrainingInfo(bioid);
+    @Path('/create-biometric')
+    @PUT
+    async createBiometric(user: User): Promise<any> {
+        this.logger.info(`Post biometric data`);
+        return this.service.createBiometric(user);
     }
 }

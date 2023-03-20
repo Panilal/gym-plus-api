@@ -19,13 +19,13 @@ export class AccountController {
 
     @POST
     async createUser(user: User): Promise<any> {
-        this.logger.info(`${user}`);
+        this.logger.info(`Post user data`);
         return this.service.createUser(user);
     }
 
 
     @PUT
-    async editUser(user: any): Promise<any> {
+    async editUser(user: User): Promise<any> {
         this.logger.info(`Edit user account`);
         return this.service.editUser(user);
     }
@@ -36,4 +36,6 @@ export class AccountController {
         this.logger.info(`Login`);
         return this.service.login(request);
     }
+
+    
 }
