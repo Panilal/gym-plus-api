@@ -11,4 +11,5 @@ export class User {
     age: string;
     muscleGain: string;
     weightLoss: string;
-} 
+}
+

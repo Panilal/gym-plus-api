@@ -14,7 +14,7 @@ export class AccountService implements AccountApi {
     ) {
         this.logger = logger.child('AccountService');
     }
-    
+
     /*async getUserById(user: User): Promise<any> {
         const response = 
                 await db.maybeOne<any>(sql`SELECT * FROM public.accounts WHERE user_id= ${user.userId};`);
@@ -22,29 +22,28 @@ export class AccountService implements AccountApi {
     }*/
 
     async editUser(user: User): Promise<string> {
-        const response = 
+        const response =
             await db.maybeOne<any>(sql`UPDATE public.users SET first_name = ${user.firstName}, last_name= ${user.lastName}, 
             email= ${user.email}, phone_number= ${user.phoneNumber}, password= ${user.password} WHERE user_id = ${user.userId} RETURNING user_id;`);
-            this.logger.info(`This is edited response: ${response}`);
-            return response;
+        this.logger.info(`This is edited response: ${response}`);
+        return response;
     }
-   
+
     async createUser(user: User): Promise<string> {
         const response = await db.maybeOne<string>(sql`INSERT INTO public.users (first_name, last_name, email, phone_number, password)
-        VALUES (${user.firstName}, ${user.lastName}, ${user.email},  ${user.phoneNumber },  ${user.password}) RETURNING user_id;`);
+        VALUES (${user.firstName}, ${user.lastName}, ${user.email},  ${user.phoneNumber},  ${user.password}) RETURNING user_id;`);
         this.logger.info(`This is created response: ${response}`);
-       return response;
+        return response;
     }
 
-    async login(request: LoginRequest): Promise<string> {
-        const response = db.maybeOne<string>(sql`SELECT * FROM public.users WHERE email=${request.email} AND password=${request.password};`);
+    async login(request: LoginRequest): Promise<any> {
+        const response = await db.maybeOne(sql`SELECT user_id, first_name, last_name, email, phone_number, height, weight, gender, age, weight_loss, muscle_gain FROM public.users WHERE email=${request.email} AND password=${request.password};`);
         this.logger.info(`This is response: ${response}`);
-        if (await response === null){
-            return "User does not exist";
-        }
-        else{
-            return "true";
-        }
+       
+        return response;
     }
-
+    async getUserBiometric(userId: string): Promise<any> {
+        const userDataPromise = await db.maybeOne<any>(sql`SELECT * FROM public.users WHERE user_id=${userId}`);
+        return userDataPromise;
+    }
 }

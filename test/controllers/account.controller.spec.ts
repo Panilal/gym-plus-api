@@ -11,7 +11,7 @@ class MockAccountService implements AccountApi {
     createUser = jest.fn().mockName('createUser');
     editUser = jest.fn().mockName('editUser');
     login = jest.fn().mockName('login');
-    //createBiometric = jest.fn().mockName('createBiometric');
+    getUserBiometric = jest.fn().mockName('getUserBiometric');
 }
 
 // Your code that uses Slonik
@@ -103,21 +103,7 @@ describe('account.controller', () => {
         });
     });
 
-    describe('Given /account/login', () => {
-
-        const requestBody = {
-            email: "preenu",
-            password: "preenu",
-        };
-        const expectedResponse = "User does not exist";
-        beforeEach(() => {
-            mockLogin.mockReturnValueOnce(Promise.resolve(expectedResponse));
-        });
-
-        test('should return "User does not exist"', done => {
-            request(app).post('/account/login').send(requestBody).expect(200).expect(expectedResponse, done);
-        });
-    });
+   
 
     describe('Given /account/login', () => {
 
@@ -125,14 +111,40 @@ describe('account.controller', () => {
             email: "preenu",
             password: "preenu",
         };
-        const expectedResponse = "true";
+        const expectedResult = ["22", 
+                                "preenu",
+                            "Rahul",
+                            "preenu@getMaxListeners.com", "5432167890", "153", "53", "female","27", 
+                            "true", "false"
+                        ] 
         beforeEach(() => {
-            mockLogin.mockReturnValueOnce(Promise.resolve(expectedResponse));
+            mockLogin.mockReturnValueOnce(Promise.resolve(expectedResult));
         });
 
-        test('should return "true"', done => {
-            request(app).post('/account/login').send(requestBody).expect(200).expect(expectedResponse, done);
+        test('should return user entire data', done => {
+            request(app).post('/account/login').send(requestBody).expect(200).expect(expectedResult, done);
         });
     });
+
+    describe('Given /account/getUserBiometric', () => {
+
+        const requestBody = {
+           userId : "22"
+        };
+        const expectedResult = ["22", 
+                                "preenu",
+                            "Rahul",
+                            "preenu@getMaxListeners.com", "5432167890", "153", "53", "female","27", 
+                            "true", "false"
+                        ] 
+        beforeEach(() => {
+            mockLogin.mockReturnValueOnce(Promise.resolve(expectedResult));
+        });
+
+        test('should return user entire data', done => {
+            request(app).post('/account/login').send(requestBody).expect(200).expect(expectedResult, done);
+        });
+    });
+
 
 });

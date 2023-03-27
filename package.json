@@ -43,6 +43,7 @@
     "jest-environment-node": "27.5.1",
     "opentracing": "^0.14.5",
     "pino": "^6.13.2",
+    "react-native-video": "^5.2.1",
     "rxjs": "^7.3.0",
     "slonik": "29.2.0",
     "slonik-interceptor-field-name-transformation": "^1.6.5",

@@ -12,14 +12,10 @@ export class InstructorsService implements InstructorsApi {
     ) {
         this.logger = logger.child('InstructorsService');
     }
-   async getInstructors(): Promise<any> {
-        const response = await (await db).transaction(async (trxConnection) => {
-            const records =
-                await trxConnection.many<any>(sql`SELECT * FROM public.instructors;`);
-            return records;
-        });
-
-        return response;
+   
+    async getInstructors(): Promise<any> {
+        const instructorResponse = await db.many<any>(sql`SELECT * FROM public.instructors;`);
+        return instructorResponse;
     }
     
 }

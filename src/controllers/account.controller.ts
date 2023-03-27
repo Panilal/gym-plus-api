@@ -23,6 +23,12 @@ export class AccountController {
         return this.service.createUser(user);
     }
 
+    @Path(':userId')
+    @GET
+    async getUserBiometric(@PathParam('userId') userId: string): Promise<any> {
+        this.logger.info(`Get user biometric data`);
+        return this.service.getUserBiometric(userId);
+    }
 
     @PUT
     async editUser(user: User): Promise<any> {

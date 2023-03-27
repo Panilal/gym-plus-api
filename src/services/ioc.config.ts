@@ -5,6 +5,8 @@ import {HelloWorldApi} from './hello-world.api';
 import {HelloWorldService} from './hello-world.service';
 import { TrainingApi } from './training.api';
 import { TrainingService } from './training.service';
+import { InstructorsApi } from './instructors.api';
+import { InstructorsService } from './instructors.service';
 
 const config: ContainerConfiguration[] = [
   {
@@ -20,6 +22,11 @@ const config: ContainerConfiguration[] = [
   {
     bind: TrainingApi,
     to: TrainingService,
+    scope: Scope.Singleton
+  },
+  {
+    bind: InstructorsApi,
+    to: InstructorsService,
     scope: Scope.Singleton
   }
 ];

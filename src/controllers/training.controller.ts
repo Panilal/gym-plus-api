@@ -3,6 +3,9 @@ import { Inject } from 'typescript-ioc';
 import { TrainingApi } from '../services';
 import { LoggerApi } from '../logger';
 import { User } from '../model/user';
+import { BiometricRequest} from '../model/biometric-request';
+import { string } from '@pact-foundation/pact/src/dsl/matchers';
+import { TrainingRequest } from 'src/model/training-request';
 
 
 @Path('/training')
@@ -17,10 +20,18 @@ export class TrainingController {
         return this._baseLogger.child('TrainingController');
     }
 
-    @Path('/create-biometric')
+    @Path(':userId')
     @PUT
-    async createBiometric(user: User): Promise<any> {
+    async createBiometric(@PathParam('userId') userId: string, request: BiometricRequest): Promise<string> {
         this.logger.info(`Post biometric data`);
-        return this.service.createBiometric(user);
+        return this.service.createBiometric(userId, request);
+    }
+
+    @Path(':userId')
+    @GET
+    async getTraining(@PathParam('userId') userId: string): Promise<string> {
+        this.logger.info(`Get Training data`);
+        return this.service.getTraining(userId);
     }
 }
+

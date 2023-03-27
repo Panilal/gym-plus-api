@@ -8,6 +8,7 @@ import { buildApiServer } from '../helper';
 
 class MockTrainingService implements TrainingApi {    
     createBiometric = jest.fn().mockName('createBiometric');
+    getTraining = jest.fn().mockName('getTraining');
 }
 
 // Your code that uses Slonik
