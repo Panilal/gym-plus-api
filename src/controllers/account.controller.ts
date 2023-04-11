@@ -4,6 +4,7 @@ import { AccountApi } from '../services';
 import { LoggerApi } from '../logger';
 import { User } from '../model/user';
 import { LoginRequest } from '../model/login-request';
+import { ProfileRequest} from '../model/profile-request';
 
 @Path('/account')
 export class AccountController {
@@ -29,12 +30,15 @@ export class AccountController {
         this.logger.info(`Get user biometric data`);
         return this.service.getUserBiometric(userId);
     }
-
     @PUT
     async editUser(user: User): Promise<any> {
-        this.logger.info(`Edit user account`);
+        this.logger.info(`Edit user data`);
         return this.service.editUser(user);
     }
+   
+    
+
+    
 
     @Path('/login')
     @POST

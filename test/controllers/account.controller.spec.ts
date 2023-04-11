@@ -10,8 +10,10 @@ import { buildApiServer } from '../helper';
 class MockAccountService implements AccountApi {
     createUser = jest.fn().mockName('createUser');
     editUser = jest.fn().mockName('editUser');
+    getUser = jest.fn().mockName('getUser');
     login = jest.fn().mockName('login');
     getUserBiometric = jest.fn().mockName('getUserBiometric');
+
 }
 
 // Your code that uses Slonik
